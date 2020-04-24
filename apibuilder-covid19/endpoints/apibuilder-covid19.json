@@ -1,0 +1,129 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "apibuilder-covid19",
+    "description": "An API Builder service",
+    "version": "1.0.0"
+  },
+  "host": "3.104.147.111:8080",
+  "basePath": "/api",
+  "paths": {
+    "/greet": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "greeting",
+            "schema": {
+              "$ref": "#/definitions/schema.apibuilder-covid19_greeting"
+            }
+          },
+          "400": {
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/schema.apibuilder-covid19_error"
+            }
+          }
+        },
+        "summary": "Greet a user",
+        "operationId": "Greet",
+        "parameters": [
+          {
+            "description": "The username",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "helloworld"
+        ],
+        "x-flow": "apibuilder-covid19-Greet"
+      }
+    },
+    "/getLocalCity": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "greeting",
+            "schema": {
+              "$ref": "#/definitions/schema.apibuilder-covid19_response"
+            }
+          },
+          "400": {
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/schema.apibuilder-covid19_error"
+            }
+          }
+        },
+        "summary": "Greet a user",
+        "operationId": "GetLocalCity",
+        "parameters": [
+          {
+            "description": "City Name in Vic",
+            "in": "query",
+            "name": "cityname",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "covid19"
+        ],
+        "x-flow": "apibuilder-covid19-GetLocalCity"
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "definitions": {
+    "schema.apibuilder-covid19_greeting": {
+      "type": "string",
+      "description": "A greeting message for the user"
+    },
+    "schema.apibuilder-covid19_response": {
+      "type": "object",
+      "properties": {
+        "cityname": {
+          "type": "string",
+          "description": "City name"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "cases": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "cityname",
+        "postcode",
+        "cases",
+        "date"
+      ]
+    },
+    "schema.apibuilder-covid19_error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "The error message"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    }
+  }
+}

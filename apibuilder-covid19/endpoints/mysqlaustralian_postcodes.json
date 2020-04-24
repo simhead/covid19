@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mysql/australian_postcodes",
+    "version": "1.0.0"
+  },
+  "basePath": "/endpoints",
+  "paths": {
+    "/australian_postcodes": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "The create succeeded.",
+            "headers": {
+              "Location": {
+                "description": "The URL to the newly created instance.",
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Create a mysql/australian_postcodes",
+        "operationId": "Create mysql/australian_postcode",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Create body",
+            "schema": {
+              "$ref": "schema:///model/mysql%2Faustralian_postcodes-full"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-create"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "The delete succeeded."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Deletes all mysql/australian_postcodess",
+        "operationId": "Delete All mysql/australian_postcode",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-deleteAll"
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The find all succeeded, and the results are available.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "schema:///model/mysql%2Faustralian_postcodes-full"
+              }
+            }
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Find all mysql/australian_postcodes",
+        "operationId": "Find All mysql/australian_postcode",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-findAll"
+      }
+    },
+    "/australian_postcodes/{locality}": {
+      "put": {
+        "responses": {
+          "204": {
+            "description": "The update succeeded."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Update a mysql/australian_postcodes",
+        "operationId": "Update mysql/australian_postcode",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locality",
+            "in": "path",
+            "description": "The mysql/australian_postcodes ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Update body",
+            "schema": {
+              "$ref": "schema:///model/mysql%2Faustralian_postcodes"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-update"
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "The delete succeeded."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Delete a specific mysql/australian_postcodes",
+        "operationId": "Delete One mysql/australian_postcode",
+        "consumes": [],
+        "parameters": [
+          {
+            "name": "locality",
+            "in": "path",
+            "description": "The mysql/australian_postcodes ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-delete"
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The find succeeded, and the results are available.",
+            "schema": {
+              "$ref": "schema:///model/mysql%2Faustralian_postcodes-full"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Find one mysql/australian_postcodes",
+        "operationId": "Find By ID mysql/australian_postcode",
+        "consumes": [],
+        "parameters": [
+          {
+            "name": "locality",
+            "in": "path",
+            "description": "The mysql/australian_postcodes ID",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-findByID"
+      }
+    },
+    "/australian_postcodes/distinct/{field}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Distinct fields response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Find distinct mysql/australian_postcodes",
+        "operationId": "Distinct mysql/australian_postcode",
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "field",
+            "description": "The field name that must be distinct.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "The number of records to fetch. The value must be greater than 0, and no greater than 1000.",
+            "required": false,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of records to skip. The value must not be less than 0.",
+            "required": false,
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Constrains values for fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "A dictionary of one or more fields specifying sorting of results. In general, you can sort based on any predefined field that you can query using the where operator, as well as on custom fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-distinct"
+      }
+    },
+    "/australian_postcodes/findAndModify": {
+      "put": {
+        "responses": {
+          "204": {
+            "description": "The find and modify succeeded."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Modifies a single mysql/australian_postcode. Although the query may match multiple mysql/australian_postcodes, only the first one will be modified.",
+        "operationId": "Find and Modify mysql/australian_postcode",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Find and modify body",
+            "schema": {
+              "$ref": "schema:///model/mysql%2Faustralian_postcodes"
+            }
+          },
+          {
+            "name": "upsert",
+            "in": "query",
+            "type": "boolean",
+            "description": "Set to true to allow the method to create a new model."
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "The number of records to fetch. The value must be greater than 0, and no greater than 1000.",
+            "required": false,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of records to skip. The value must not be less than 0.",
+            "required": false,
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Constrains values for fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "A dictionary of one or more fields specifying sorting of results. In general, you can sort based on any predefined field that you can query using the where operator, as well as on custom fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "sel",
+            "description": "Selects which fields to return from the query. Others are excluded. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "unsel",
+            "description": "Selects which fields to not return from the query. Others are included. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-findAndModify"
+      }
+    },
+    "/australian_postcodes/count": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The count succeeded, and the results are available.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Count a mysql/australian_postcodes",
+        "operationId": "Count mysql/australian_postcode",
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Constrains values for fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-count"
+      }
+    },
+    "/australian_postcodes/upsert": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "The upsert succeeded, and resulted in an insert.",
+            "headers": {
+              "Location": {
+                "description": "The URL to the newly created instance.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The upsert succeeded, and resulted in an update."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Create or update a mysql/australian_postcodes",
+        "operationId": "Upsert mysql/australian_postcode",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "description": "Upsert body",
+            "schema": {
+              "$ref": "schema:///model/mysql%2Faustralian_postcodes-full"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-upsert"
+      }
+    },
+    "/australian_postcodes/query": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "The query succeeded, and the results are available.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "schema:///model/mysql%2Faustralian_postcodes-full"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "401": {
+            "description": "This request requires user authentication, as configured by the server."
+          },
+          "404": {
+            "description": "No results were found."
+          },
+          "500": {
+            "description": "Something went wrong during the request; check out the logs on your server."
+          }
+        },
+        "description": "Query a mysql/australian_postcodes",
+        "operationId": "Query mysql/australian_postcode",
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "The number of records to fetch. The value must be greater than 0, and no greater than 1000.",
+            "required": false,
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "The number of records to skip. The value must not be less than 0.",
+            "required": false,
+            "type": "number",
+            "minimum": 0
+          },
+          {
+            "in": "query",
+            "name": "where",
+            "description": "Constrains values for fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "A dictionary of one or more fields specifying sorting of results. In general, you can sort based on any predefined field that you can query using the where operator, as well as on custom fields. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "sel",
+            "description": "Selects which fields to return from the query. Others are excluded. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          },
+          {
+            "in": "query",
+            "name": "unsel",
+            "description": "Selects which fields to not return from the query. Others are included. The value should be encoded JSON.",
+            "required": false,
+            "type": "string",
+            "format": "json"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "mysql/australian_postcodes"
+        ],
+        "x-flow": "mysqlaustralian_postcodes-query"
+      }
+    }
+  }
+}

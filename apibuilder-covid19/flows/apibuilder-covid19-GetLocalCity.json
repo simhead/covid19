@@ -1,0 +1,321 @@
+{
+	"schemaVersion": "4",
+	"info": {
+		"name": "apibuilder-covid19 - get /getLocalCity"
+	},
+	"parameter": {
+		"properties": {
+			"params": {
+				"type": "object",
+				"description": "The parameters from the endpoint."
+			},
+			"request": {
+				"type": "object",
+				"description": "The HTTP request."
+			},
+			"config": {
+				"type": "object",
+				"description": "The service's configuration"
+			},
+			"env": {
+				"type": "object",
+				"description": "The host OS environment"
+			}
+		},
+		"additionalProperties": false,
+		"required": [
+			"params",
+			"request",
+			"config",
+			"env"
+		]
+	},
+	"start": "condition.1",
+	"nodes": {
+		"condition.1": {
+			"type": "nodehandler://axway-flow/condition",
+			"name": "Check cityname",
+			"method": "exists",
+			"parameters": [
+				{
+					"name": "source",
+					"type": "jsonpath",
+					"value": "$.params.cityname",
+					"metaName": "source",
+					"metaDescription": "The input to test."
+				}
+			],
+			"outputs": {
+				"true": {
+					"routes": [
+						"mustache.2"
+					],
+					"context": "$.exists",
+					"metaName": "True"
+				},
+				"false": {
+					"routes": [
+						"http.1"
+					],
+					"context": "$.exists",
+					"metaName": "False"
+				}
+			},
+			"metaMethod": "Exists"
+		},
+		"http.1": {
+			"type": "nodehandler://axway-flow/http",
+			"name": "Set HTTP Response",
+			"method": "setresponse",
+			"parameters": [
+				{
+					"name": "status",
+					"type": "number",
+					"value": "400",
+					"metaName": "status",
+					"metaDescription": "The HTTP status code"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.response",
+					"routes": [],
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Set HTTP Response"
+		},
+		"http.2": {
+			"type": "nodehandler://axway-flow/http",
+			"name": "Set HTTP Response",
+			"method": "setresponse",
+			"parameters": [
+				{
+					"name": "status",
+					"type": "number",
+					"value": "200",
+					"metaName": "status",
+					"metaDescription": "The HTTP status code"
+				},
+				{
+					"name": "body",
+					"type": "jsonpath",
+					"value": "$.value",
+					"metaName": "body",
+					"metaDescription": "The response payload"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.response",
+					"routes": [],
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Set HTTP Response"
+		},
+		"mustache.1": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-mustache/mustache",
+			"name": "Format string",
+			"method": "format",
+			"parameters": [
+				{
+					"name": "data",
+					"type": "jsonpath",
+					"value": "$",
+					"metaName": "data",
+					"metaDescription": "The value to assign to the \"data\" variable in the template"
+				},
+				{
+					"name": "template",
+					"type": "string",
+					"value": "\"{\\n  \\\"cityname\\\": \\\"{{data.json}}\\\",\\n  \\\"postcode\\\": \\\"2000\\\",\\n  \\\"cases\\\": {{data.queried.cases}},\\n  \\\"date\\\": \\\"{{data.queried.filedate}}\\\"\\n}\"",
+					"metaName": "template",
+					"metaDescription": "The Mustache template. e.g. `Hi {{data.user}}`"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.response",
+					"routes": [],
+					"metaName": "Next"
+				},
+				"error": {
+					"context": "$.error",
+					"routes": [],
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Format string"
+		},
+		"covid_daily.1": {
+			"type": "nodehandler://api-builder-flow-invoke/model/mysql/covid_daily",
+			"name": "Query",
+			"method": "query",
+			"parameters": [
+				{
+					"name": "where",
+					"type": "jsonpath",
+					"value": "$.wherevalue",
+					"metaName": "where",
+					"metaDescription": "JSON-encoded object specifying field constraints. The field name is the key and the value is the constraint statement or value."
+				}
+			],
+			"outputs": {
+				"next": {
+					"routes": [
+						"json.1"
+					],
+					"context": "$.queried1",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Query"
+		},
+		"mustache.2": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-mustache/mustache",
+			"name": "format sql for daily table",
+			"method": "format",
+			"parameters": [
+				{
+					"name": "data",
+					"type": "jsonpath",
+					"value": "$",
+					"metaName": "data",
+					"metaDescription": "The value to assign to the \"data\" variable in the template"
+				},
+				{
+					"name": "template",
+					"type": "string",
+					"value": "\"{\\\"locality\\\":\\\"{{data.params.cityname}}\\\"}\"",
+					"metaName": "template",
+					"metaDescription": "The Mustache template. e.g. `Hi {{data.user}}`"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.wherevalue",
+					"routes": [
+						"covid_daily.1",
+						"australian_postcodes.1"
+					],
+					"metaName": "Next"
+				},
+				"error": {
+					"context": "$.error",
+					"routes": [],
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Format string"
+		},
+		"json.1": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-json/json",
+			"name": "Stringify",
+			"method": "stringify",
+			"parameters": [
+				{
+					"name": "value",
+					"type": "jsonpath",
+					"value": "$.queried1",
+					"metaName": "value",
+					"metaDescription": "The value to convert to a JSON string."
+				}
+			],
+			"outputs": {
+				"next": {
+					"routes": [
+						"mustache.3"
+					],
+					"context": "$.json1",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Stringify"
+		},
+		"australian_postcodes.1": {
+			"type": "nodehandler://api-builder-flow-invoke/model/mysql/australian_postcodes",
+			"name": "Query",
+			"method": "query",
+			"parameters": [
+				{
+					"name": "where",
+					"type": "jsonpath",
+					"value": "$.wherevalue",
+					"metaName": "where",
+					"metaDescription": "JSON-encoded object specifying field constraints. The field name is the key and the value is the constraint statement or value."
+				}
+			],
+			"outputs": {
+				"next": {
+					"routes": [
+						"json.2"
+					],
+					"context": "$.queried2",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Query"
+		},
+		"json.2": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-json/json",
+			"name": "Stringify",
+			"method": "stringify",
+			"parameters": [
+				{
+					"name": "value",
+					"type": "jsonpath",
+					"value": "$.queried2",
+					"metaName": "value",
+					"metaDescription": "The value to convert to a JSON string."
+				}
+			],
+			"outputs": {
+				"next": {
+					"routes": [
+						"mustache.3"
+					],
+					"context": "$.json2",
+					"metaName": "Next"
+				}
+			},
+			"metaMethod": "Stringify"
+		},
+		"mustache.3": {
+			"type": "nodehandler://@axway/api-builder-plugin-fn-mustache/mustache",
+			"name": "Format string",
+			"method": "format",
+			"parameters": [
+				{
+					"name": "data",
+					"type": "jsonpath",
+					"value": "$",
+					"metaName": "data",
+					"metaDescription": "The value to assign to the \"data\" variable in the template"
+				},
+				{
+					"name": "template",
+					"type": "string",
+					"value": "\"{{data.json1}}\\n-----------------\\n{{data.json2}}\"",
+					"metaName": "template",
+					"metaDescription": "The Mustache template. e.g. `Hi {{data.user}}`"
+				}
+			],
+			"outputs": {
+				"next": {
+					"context": "$.value",
+					"routes": [
+						"http.2"
+					],
+					"metaName": "Next"
+				},
+				"error": {
+					"context": "$.error",
+					"routes": [],
+					"metaName": "Error"
+				}
+			},
+			"metaMethod": "Format string"
+		}
+	}
+}
