@@ -57,17 +57,28 @@ try:
             #print(localcity_details)
             for jx, record in enumerate(localcity_details):
                 city_strlist = record.split(" ")
-                if len(city_strlist) > 1:
-                    #print("string details::::: ", city_strlist)
+                if len(city_strlist) > 1 and len(city_strlist) < 8 :
+                    print("string details::::: ", city_strlist)
                     mergename = city_strlist[0]
                     cases = city_strlist[1]
+                    cityflag = '(C)'
                     if len(city_strlist) > 2:
                         cases = city_strlist[2]
+                        cityflag = city_strlist[1]
                     filedate = sys.argv[1]
-                    if len(city_strlist) == 4:
+                    if len(city_strlist) == 4 and cityflag != '(C)' and cityflag != '(S)' and cityflag != '(RC)':
                         mergename = city_strlist[0]+" "+city_strlist[1]
+                        print("CITYNAME DEFAULT :", mergename)
                         cases = city_strlist[3]
-                    print(mergename.strip(), "LEN: ", len(city_strlist))
+                    elif len(city_strlist) == 4 and (cityflag == '(C)' or cityflag == '(S)' or cityflag == '(RC)'):
+                        mergename = city_strlist[0]
+                        print("CITYNAME SHORT :", mergename)
+                        cases = city_strlist[3]
+                    elif len(city_strlist) == 5:
+                        mergename = city_strlist[0]+" "+city_strlist[1]
+                        print("CITYNAME LONG :", mergename)
+                        cases = city_strlist[4]
+                    print(mergename.strip(), "LEN: ", len(city_strlist), " cases: ", cases)
                     values_str = "('"+mergename.strip()+"','"+cases.strip()+"',STR_TO_DATE('"+filedate+"', '%d-%M-%Y'))"
                     sql = "INSERT INTO covid19.covid_daily (locality, cases, filedate) VALUES "+values_str
                     print(sql)
